@@ -1,5 +1,5 @@
+import apiClient from "~/api/apiClient";
 import type { Route } from "./+types/home";
-import { Welcome } from "../welcome/welcome";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -8,6 +8,20 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
+export async function loader({ request }: Route.LoaderArgs) {
+	const response = await apiClient.get('/api/public/status/page/settings');
+  console.log("===>Response", response);
+
+
+	return {
+		statusPage: response,
+	};
+}
+
 export default function Home() {
-  return <Welcome />;
+  return <div>
+  <h1 className='text-2xl'>Welcome to React</h1>
+  Welcome to React
+  <button onClick={async () => console.log('Home')}>Home</button>
+</div>
 }
