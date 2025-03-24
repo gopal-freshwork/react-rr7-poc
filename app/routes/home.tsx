@@ -22,6 +22,9 @@ export default function Home() {
   return <div>
   <h1 className='text-2xl'>Welcome to React</h1>
   Welcome to React
-  <button onClick={async () => console.log('Home')}>Home</button>
+  <button onClick={async () => {
+    const response = await apiClient.get('/api/public/status/page/settings');
+    console.log("===>Response", response);
+  }}>Home</button>
 </div>
 }
